@@ -9,11 +9,9 @@ import cucumber.api.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 public class ContactUsSteps {
@@ -39,18 +37,21 @@ public class ContactUsSteps {
 
     @And("^I enter a first name$")
     public void iEnterAFirstName() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        //driver.selectWindow("name=NewPage");
         System.out.println("This is the page with title: "+driver.getTitle());
-        driver.switchTo().window("WebDriver | Contact Us");
-        System.out.println("This is the page with title2: "+driver.getTitle());
-        driver.findElement(By.xpath("//*[@id=\"contact_form\"]/input[1]")).sendKeys("lisek");
+        ArrayList<String> windowHandles = (ArrayList<String>) driver.getWindowHandles();
+        //windowHandles.add(driver.getWindowHandles());
+        driver.switchTo().window(windowHandles.get(2));
+        windowHandles.clear();
+
+
+        System.out.println("This is the page with title2: ");
+        driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
+        driver.findElement(By.xpath("//*[@id=\"contact_form\"]/input[1]")).sendKeys("Name1");
     }
 
     @And("^I enter a last name$")
     public void iEnterALastName() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+        driver.findElement(By.xpath("//*[@id=\"contact_form\"]/input[2]")).sendKeys("LastName1");
     }
 
     @And("^I enter an email address$")
