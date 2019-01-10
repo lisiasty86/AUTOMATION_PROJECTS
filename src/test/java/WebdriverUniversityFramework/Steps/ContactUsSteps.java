@@ -39,7 +39,6 @@ public class ContactUsSteps {
 
     @And("^I enter a first name$")
     public void iEnterAFirstName() throws Throwable {
-        System.out.println("This is the page with title: "+driver.getTitle());
         /*ArrayList<String> windowHandles = (ArrayList<String>) driver.getWindowHandles();
         //windowHandles.add(driver.getWindowHandles());
         driver.switchTo().window(windowHandles.get(2));
@@ -49,12 +48,9 @@ public class ContactUsSteps {
         //driver.findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL +"t");
 
         ArrayList tabs = new ArrayList (driver.getWindowHandles());
-        System.out.println(tabs.size());
+        //System.out.println(tabs.size());
         driver.switchTo().window((String) tabs.get(1));
-        //driver.switchTo().window(driver.getTitle("WebDriver | Contact Us"));
 
-
-        System.out.println("This is the page with title2: "+driver.getTitle());
         driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
         driver.findElement(By.xpath("//*[@id=\"contact_form\"]/input[1]")).sendKeys("Name1");
     }
@@ -90,40 +86,18 @@ public class ContactUsSteps {
 
     }
 
-/*
-    @And("^I enter a non valid first name$")
-    public void iEnterANonValidFirstName() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+    @And("^I enter an inwalid email address$")
+    public void iEnterAnInwalidEmailAddress() throws Throwable {
+        driver.findElement(By.xpath("//*[@id=\"contact_form\"]/input[3]")).sendKeys("Name1_LastName1gmail.com");
     }
 
-    @And("^I enter a non valid last name$")
-    public void iEnterANonValidLastName() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
-    }
+    @Then("^the information should not successfully be submitted via the contact us form$")
+    public void theInformationShouldNotSuccessfullyBeSubmittedViaTheContactUsForm() throws Throwable {
+        Assert.assertTrue(driver.getPageSource().contains("Error: Invalid email address"));
 
-    @And("^I enter an non valid email address$")
-    public void iEnterAnNonValidEmailAddress() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
-    }
+        driver.close();
 
-    @And("^I enter no comments$")
-    public void iEnterNoComments() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+        driver.quit();
     }
-
-    @Then("^the information should not be successfully be submitted via the contact us form$")
-    public void theInformationShouldNotBeSuccessfullyBeSubmittedViaTheContactUsForm() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
-    }
-
-    @And("^the user should also be notified of the problem$")
-    public void theUserShouldAlsoBeNotifiedOfTheProblem() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
-    }*/
+    
 }

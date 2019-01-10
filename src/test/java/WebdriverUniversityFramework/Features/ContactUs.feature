@@ -13,5 +13,13 @@ Feature: Submit data to webdriveruniversity.com using contact us form
     When I click on the submit button
     Then the information should successfully be submitted via the contact us form
 
+  Scenario: Submit wrond information using the contact us form
+    And I enter a first name
+    And I enter a last name
+    And I enter an inwalid email address
+    And I enter comments
+    When I click on the submit button
+    Then the information should not successfully be submitted via the contact us form
+
 
 
