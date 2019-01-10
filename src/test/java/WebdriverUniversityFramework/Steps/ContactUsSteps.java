@@ -10,10 +10,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
 public class ContactUsSteps {
@@ -78,7 +82,13 @@ public class ContactUsSteps {
     @Then("^the information should successfully be submitted via the contact us form$")
     public void theInformationShouldSuccessfullyBeSubmittedViaTheContactUsForm() throws Throwable {
         Assert.assertTrue(driver.findElement(By.xpath("//*[@id=\"contact_reply\"]/h1")).isDisplayed());
-        driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
+        //driver.manage().timeouts().setScriptTimeout(200, TimeUnit.SECONDS);
+        //WebDriverWait wait=new WebDriverWait(driver, 2000);
+
+        /*Wait< WebDriver> wait = new FluentWait<WebDriver>(driver)
+                .withTimeout(300, TimeUnit.SECONDS)
+                .pollingEvery(500, TimeUnit.SECONDS)
+                .ignoring(NoSuchElementException.class);*/
 
         driver.close();
 
@@ -99,5 +109,5 @@ public class ContactUsSteps {
 
         driver.quit();
     }
-    
+
 }
