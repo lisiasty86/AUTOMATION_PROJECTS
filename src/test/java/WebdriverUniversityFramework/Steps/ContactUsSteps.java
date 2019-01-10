@@ -7,8 +7,10 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -38,13 +40,21 @@ public class ContactUsSteps {
     @And("^I enter a first name$")
     public void iEnterAFirstName() throws Throwable {
         System.out.println("This is the page with title: "+driver.getTitle());
-        ArrayList<String> windowHandles = (ArrayList<String>) driver.getWindowHandles();
+        /*ArrayList<String> windowHandles = (ArrayList<String>) driver.getWindowHandles();
         //windowHandles.add(driver.getWindowHandles());
         driver.switchTo().window(windowHandles.get(2));
-        windowHandles.clear();
+        windowHandles.clear();*/
+
+        String windowHandle = driver.getWindowHandle();
+        //driver.findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL +"t");
+
+        ArrayList tabs = new ArrayList (driver.getWindowHandles());
+        System.out.println(tabs.size());
+        driver.switchTo().window((String) tabs.get(1));
+        //driver.switchTo().window(driver.getTitle("WebDriver | Contact Us"));
 
 
-        System.out.println("This is the page with title2: ");
+        System.out.println("This is the page with title2: "+driver.getTitle());
         driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
         driver.findElement(By.xpath("//*[@id=\"contact_form\"]/input[1]")).sendKeys("Name1");
     }
@@ -56,27 +66,30 @@ public class ContactUsSteps {
 
     @And("^I enter an email address$")
     public void iEnterAnEmailAddress() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+        driver.findElement(By.xpath("//*[@id=\"contact_form\"]/input[3]")).sendKeys("Name1_LastName1@gmail.com");
     }
 
     @And("^I enter comments$")
     public void iEnterComments() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+        driver.findElement(By.xpath("//*[@id=\"contact_form\"]/textarea")).sendKeys("This is some comment about this page bla bla bla \ntest new line");
     }
 
     @When("^I click on the submit button$")
     public void iClickOnTheSubmitButton() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+        driver.findElement(By.xpath("//*[@id=\"form_buttons\"]/input[2]")).click();
     }
 
     @Then("^the information should successfully be submitted via the contact us form$")
     public void theInformationShouldSuccessfullyBeSubmittedViaTheContactUsForm() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+        Assert.assertTrue(driver.findElement(By.xpath("//*[@id=\"contact_reply\"]/h1")).isDisplayed());
+        driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
+
+        driver.close();
+
+        driver.quit();
+
     }
+
 /*
     @And("^I enter a non valid first name$")
     public void iEnterANonValidFirstName() throws Throwable {
