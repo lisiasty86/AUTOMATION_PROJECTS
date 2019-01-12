@@ -6,29 +6,36 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 public class LoginSteps {
 
-    //WebDriver driver;
+    WebDriver driver;
 
-    /*@Before()
+    @Before()
     public void setup() throws IOException {
         this.driver = new ChromeDriver();
         this.driver.manage().window().maximize();
-        this.driver.manage().timeouts().pageLoadTimeout(120, TimeUnit.SECONDS);
-    }*/
+        this.driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
+    }
 
-    /*@When("^I click on the login portal button$")
+    @Given("^I access webdriveruniversity2$")
+    public void iAccessWebdriveruniversity() {
+        driver.get("http://www.webdriveruniversity.com/index.html");
+    }
+
+    @When("^I click on the login portal button$")
     public void iClickOnTheLoginPortalButton() throws Throwable {
         this.driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
         driver.findElement(By.xpath("//*[@id=\"login-portal\"]/div/div[1]/h1")).click();
-        System.out.println("Login Portal");
+        //System.out.println("Login Portal");
     }
 
     @And("^I enter a username$")
@@ -40,30 +47,38 @@ public class LoginSteps {
             driver.switchTo().window(winHandler);
         }
 
-        driver.findElement(By.id("text")).sendKeys("webdriver");
+        driver.findElement(By.id("text")).sendKeys("Tom");
     }
 
     @And("^I enter a \"([^\"]*)\" password$")
-    public void iEnterAPassword(String arg0) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+    public void iEnterAPassword(String password) throws Throwable {
+        driver.findElement(By.xpath("//*[@id=\"password\"]")).sendKeys(password);
     }
 
     @When("^I click on the login button$")
     public void iClickOnTheLoginButton() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+        driver.findElement(By.xpath("//*[@id=\"login-button\"]")).click();
     }
 
     @Then("^I should be presented with a successful validation alert$")
     public void iShouldBePresentedWithASuccessfulValidationAlert() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+        Alert alert = driver.switchTo().alert();
+        System.out.println(alert.getText());
+        Assert.assertEquals("validation failed", alert.getText());
+
+        driver.close();
+        driver.quit();
     }
 
     @Then("^I should be presented with a unsuccessful validation alert$")
     public void iShouldBePresentedWithAUnsuccessfulValidationAlert() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
-    }*/
+        Alert alert = driver.switchTo().alert();
+        System.out.println(alert.getText());
+
+        //actual expects
+        Assert.assertEquals("validation failed", alert.getText());
+
+        driver.close();
+        driver.quit();
+    }
 }

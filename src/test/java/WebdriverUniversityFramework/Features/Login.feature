@@ -1,7 +1,7 @@
 Feature: Login to account at webdriveruniversity.com using login portal
 
   Background:
-    Given I access webdriveruniversity
+    Given I access webdriveruniversity2
     When I click on the login portal button
     And I enter a username
 
