@@ -19,15 +19,18 @@ public class LoginSteps {
 
     WebDriver driver;
 
-    @Before()
+    /*@Before()
     public void setup() throws IOException {
         this.driver = new ChromeDriver();
         this.driver.manage().window().maximize();
         this.driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
-    }
+    }*/
 
     @Given("^I access webdriveruniversity2$")
     public void iAccessWebdriveruniversity() {
+        this.driver = new ChromeDriver();
+        this.driver.manage().window().maximize();
+        this.driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
         driver.get("http://www.webdriveruniversity.com/index.html");
     }
 

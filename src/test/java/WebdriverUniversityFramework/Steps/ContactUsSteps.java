@@ -24,15 +24,16 @@ public class ContactUsSteps {
 
     WebDriver driver;
 
-    @Before()
+    /*@Before
     public void setup() throws IOException {
-        this.driver = new ChromeDriver();
-        this.driver.manage().window().maximize();
-        this.driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
-    }
+
+    }*/
 
     @Given("^I access webdriveruniversity$")
     public void iAccessWebdriveruniversity() {
+        this.driver = new ChromeDriver();
+        this.driver.manage().window().maximize();
+        this.driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
         driver.get("http://www.webdriveruniversity.com/index.html");
     }
 
@@ -90,7 +91,7 @@ public class ContactUsSteps {
                 .pollingEvery(500, TimeUnit.SECONDS)
                 .ignoring(NoSuchElementException.class);*/
 
-        driver.close();
+        //driver.close();
 
         driver.quit();
 
@@ -105,7 +106,7 @@ public class ContactUsSteps {
     public void theInformationShouldNotSuccessfullyBeSubmittedViaTheContactUsForm() throws Throwable {
         Assert.assertTrue(driver.getPageSource().contains("Error: Invalid email address"));
 
-        driver.close();
+        //driver.close();
 
         driver.quit();
     }
