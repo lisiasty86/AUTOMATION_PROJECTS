@@ -1,6 +1,7 @@
 package WebdriverUniversityFramework.Steps;
 
 import cucumber.api.PendingException;
+import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -24,16 +25,24 @@ public class ContactUsSteps {
 
     WebDriver driver;
 
-    /*@Before
+    @Before
     public void setup() throws IOException {
-
-    }*/
-
-    @Given("^I access webdriveruniversity$")
-    public void iAccessWebdriveruniversity() {
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\llis\\Desktop\\MOJE\\PROGRAMOWANIE\\chromedriver.exe");
         this.driver = new ChromeDriver();
         this.driver.manage().window().maximize();
         this.driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
+    }
+
+    @After()
+    public void tearDown() {
+        driver.manage().deleteAllCookies();
+        driver.close();
+        driver.quit();
+    }
+
+    @Given("^I access webdriveruniversity$")
+    public void iAccessWebdriveruniversity() {
+
         driver.get("http://www.webdriveruniversity.com/index.html");
     }
 
@@ -93,7 +102,7 @@ public class ContactUsSteps {
 
         //driver.close();
 
-        driver.quit();
+        //driver.quit();
 
     }
 
@@ -108,7 +117,7 @@ public class ContactUsSteps {
 
         //driver.close();
 
-        driver.quit();
+        //driver.quit();
     }
 
 }
