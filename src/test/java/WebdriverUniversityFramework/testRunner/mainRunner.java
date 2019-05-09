@@ -1,6 +1,7 @@
 package WebdriverUniversityFramework.testRunner;
 
 import cucumber.api.CucumberOptions;
+import cucumber.api.testng.AbstractTestNGCucumberTests;
 import org.junit.runner.RunWith;
 import cucumber.api.junit.Cucumber;
 
@@ -18,5 +19,5 @@ import cucumber.api.junit.Cucumber;
                 "com.cucumber.listener.ExtentCucumberFormatter:target/report.html"}
 )
 
-public class mainRunner {
+public class mainRunner extends AbstractTestNGCucumberTests{
 }

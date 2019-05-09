@@ -15,6 +15,7 @@ Feature: Login to account at webdriveruniversity.com using login portal
  #   When I click on the login button
  #   Then I should be presented with a unsuccessful validation alert
 
+@loging
   Scenario Outline: Login to account with credentials
       Given user navigates to "<url>"
       When user clicks on the login portal button
