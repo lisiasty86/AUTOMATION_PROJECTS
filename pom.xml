@@ -14,13 +14,24 @@
             <plugins>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.8.0</version>
+                    <configuration>
+                        <source>7</source>
+                        <target>7</target>
+                        <fork>true</fork>
+                        <executable>${env.JAVA_HOME}\bin\javac.exe</executable>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>2.22.2</version>
                     <configuration>
                         <suiteXmlFiles>
                             <suiteXmlFile>testng.xml</suiteXmlFile>
                         </suiteXmlFiles>
-                        <testErrorIgnore>false</testErrorIgnore>
+                        <!--<testErrorIgnore>false</testErrorIgnore>-->
                         <testFailureIgnore>false</testFailureIgnore>
                     </configuration>
                 </plugin>
@@ -108,7 +119,7 @@
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>7.0.0-beta1</version>
+            <version>6.14.3</version>
             <scope>test</scope>
         </dependency>
 
