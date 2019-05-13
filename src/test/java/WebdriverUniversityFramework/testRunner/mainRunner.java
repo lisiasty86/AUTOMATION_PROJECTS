@@ -12,7 +12,7 @@ import cucumber.api.junit.Cucumber;
         glue = {"WebdriverUniversityFramework.Steps"},
         monochrome = true,
         dryRun = false,
-        tags = {},
+        tags = {"@product"},
         plugin = {"pretty",
                 "html:target/cucumber",
                 "json:target/cucumber.json",
